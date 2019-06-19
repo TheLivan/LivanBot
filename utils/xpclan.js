@@ -9,15 +9,15 @@ module.exports.xpAdd = (message, bot) => {
     if(message.channel != bot.channels.get('475350792426094607')){
         if(message.member.roles.some(r=>["Бандит"].includes(r.name))){
             redisclient.get('banditpoints', function (err, reply) {
-                console.log("На данный момент у бандитов " + Number(reply));
                 redisclient.set('banditpoints', String(Number(reply) + Number(xpAdd)));
+                console.log("На данный момент у бандитов " + Number(reply));
             });
         }
         
         if(message.member.roles.some(r=>["Сталкер"].includes(r.name))){
             redisclient.get('stalkerpoints', function (err, reply) {
-                console.log("На данный момент у сталкеров " + Number(reply));
                 redisclient.set('stalkerpoints', String(Number(reply) + Number(xpAdd)));
+                console.log("На данный момент у сталкеров " + Number(reply));
             });
         }
     }
