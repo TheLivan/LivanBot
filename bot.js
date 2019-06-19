@@ -28,9 +28,9 @@ bot.on('message', async message => {
     let command_file = bot.commands.get(command.slice(prefix.length)) // получение команды из коллекции
     if (command_file) command_file.run(bot, message, args)
     
-    xpclan.xpAdd(message);
+    xpclan.xpAdd(message, bot);
     
-    xpclan.setXpChannel();
+    xpclan.setXpChannel(bot);
 })
 
 bot.on('ready', () => {

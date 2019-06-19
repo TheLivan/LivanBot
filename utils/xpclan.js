@@ -1,10 +1,9 @@
 const Discord = require("discord.js");
 const fs = require("fs");
 var redis = require('redis');
-const bot = new Discord.Client()
 var redisclient = redis.createClient(process.env.REDISCLOUD_URL, {no_ready_check: true});
 
-module.exports.xpAdd = (message) => {
+module.exports.xpAdd = (message, bot) => {
 
     let xpAdd = Math.floor(Math.random() * 7) + 8;
     if(message.channel != bot.channels.get('475350792426094607')){
@@ -24,10 +23,10 @@ module.exports.xpAdd = (message) => {
     }
 }
 
-module.exports.setXpChannel = () => {
+module.exports.setXpChannel = (bot) => {
     redisclient.get('stalkerpoints', function (err, stalkerpoints) {
         redisclient.get('banditpoints', function (err, banditpoints) {
-            bot.channels.get('588038742669918274').edit({ name: 'STAL: ' + stalkerpoints + ' ' + 'BAND: ' + banditpoints})
+            bot.channels.get('588038742669918274').edit({name: 'STAL: ' + stalkerpoints + ' ' + 'BAND: ' + banditpoints})
     });
 });
 }
