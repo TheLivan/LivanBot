@@ -29,8 +29,6 @@ bot.on('message', async message => {
     if (command_file) command_file.run(bot, message, args)
     
     xpclan.xpAdd(message, bot);
-    
-    xpclan.setXpChannel(bot);
 })
 
 bot.on('ready', () => {

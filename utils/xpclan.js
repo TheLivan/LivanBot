@@ -1,5 +1,4 @@
 const Discord = require("discord.js");
-const fs = require("fs");
 var redis = require('redis');
 var redisclient = redis.createClient(process.env.REDISCLOUD_URL, {no_ready_check: true});
 
@@ -20,6 +19,7 @@ module.exports.xpAdd = (message, bot) => {
                 console.log("На данный момент у сталкеров " + Number(reply));
             });
         }
+        setXpChannel(bot);
     }
 }
 
