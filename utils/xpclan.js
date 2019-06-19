@@ -19,14 +19,10 @@ module.exports.xpAdd = (message, bot) => {
                 console.log("На данный момент у сталкеров " + Number(reply));
             });
         }
-        setXpChannel(bot);
-    }
-}
-
-module.exports.setXpChannel = (bot) => {
-    redisclient.get('stalkerpoints', function (err, stalkerpoints) {
-        redisclient.get('banditpoints', function (err, banditpoints) {
-            bot.channels.get('588038742669918274').edit({name: 'STAL: ' + stalkerpoints + ' ' + 'BAND: ' + banditpoints})
+        redisclient.get('stalkerpoints', function (err, stalkerpoints) {
+            redisclient.get('banditpoints', function (err, banditpoints) {
+                bot.channels.get('588038742669918274').edit({name: 'STAL: ' + stalkerpoints + ' ' + 'BAND: ' + banditpoints})
+        });
     });
-});
+    }
 }
