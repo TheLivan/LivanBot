@@ -1,5 +1,5 @@
 const Discord = require('discord.js') // подключение discord.js к файлу
-const options = require('./ss.js');
+const options = require('../ss.js');
 
 
 module.exports.run = async (bot, message, args) => {
