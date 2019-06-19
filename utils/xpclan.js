@@ -27,7 +27,7 @@ module.exports.xpAdd = (message) => {
 module.exports.setXpChannel = () => {
     redisclient.get('stalkerpoints', function (err, stalkerpoints) {
         redisclient.get('banditpoints', function (err, banditpoints) {
-            client.channels.get('588038742669918274').edit({ name: 'STAL: ' + stalkerpoints + ' ' + 'BAND: ' + banditpoints})
+            bot.channels.get('588038742669918274').edit({ name: 'STAL: ' + stalkerpoints + ' ' + 'BAND: ' + banditpoints})
     });
 });
 }
