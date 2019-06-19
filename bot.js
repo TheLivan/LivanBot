@@ -19,7 +19,7 @@ fs.readdir('./commands', (err, files) => { // чтение файлов в па�
 })
 
 bot.on('message', async message => {
-    let prefix = config.prefix
+    let prefix = process.env.PREFIX
     let messageArray = message.content.split(' ') // разделение пробелами
     let command = messageArray[0] // команда после префикса
     let args = messageArray.slice(1) // аргументы после команды
@@ -42,7 +42,9 @@ Campy the Livan Bot
     console.log(`Logged in as ${bot.user.tag}!`);
     bot.user.setPresence({status: 'dnd', game:{name: 'подписывайтесь на уведомитель', type: 0}})
 
-
+    var interval = setInterval (function () {
+		client.channels.get('587243104625491970').send('ban huan');
+	}, 1 * 900000); 
 })
 
-bot.login(config.token)
+bot.login(process.env.BOT_TOKEN)
