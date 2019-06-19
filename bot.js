@@ -30,7 +30,7 @@ bot.on('message', async message => {
     if (command_file) command_file.run(bot, message, args)
 
     let xpAdd = Math.floor(Math.random() * 7) + 8;
-    if(!client.channels.get('475350792426094607')){
+    if(message.channel != client.channels.get('475350792426094607')){
         if(message.member.roles.some(r=>["Бандит"].includes(r.name))){
             redisclient.get('banditpoints', function (err, reply) {
                 console.log("На данный момент у бандитов " + Number(reply));
