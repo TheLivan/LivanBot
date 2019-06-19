@@ -2,7 +2,6 @@ const Discord = require('discord.js')
 const fs = require('fs')
 const bot = new Discord.Client()
 bot.commands = new Discord.Collection() 
-const config = require('./config.json')
 var redis = require('redis');
 var redisclient = redis.createClient(process.env.REDISCLOUD_URL, {no_ready_check: true});
 
@@ -38,7 +37,7 @@ bot.on('message', async message => {
 			redisclient.set('banditpoints', String(Number(reply) + Number(xpAdd)));
 		});
 	}
-		
+
 	if(message.member.roles.some(r=>["Сталкер"].includes(r.name))){
 		redisclient.get('stalkerpoints', function (err, reply) {
 			console.log("На данный момент у сталкеров " + Number(reply));
