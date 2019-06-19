@@ -1,7 +1,7 @@
 const Discord = require('discord.js') // подключение discord.js к файлу
 
 module.exports.run = async (bot, message, args) => {
-
+    var eventName = 'ban';
   var server = message.guild;
     var permsName = eventName+"-"+message.author.username;
     message.guild.createRole({
@@ -37,7 +37,7 @@ module.exports.run = async (bot, message, args) => {
         }
     ).catch(console.error);
     return '```Added```';
-        
+
     const start = process.hrtime();
   return Promise.resolve('Pong!').then(() => {
     const diff = process.hrtime(start);
