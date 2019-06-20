@@ -1,5 +1,5 @@
 module.exports.run = async (bot, message, args) => {
-    var eventName = 'ban';
+    var eventName = 'privatechannel';
     var server = message.guild;
     var permsName = eventName+"-"+message.author.username;
     message.guild.createRole({
@@ -18,7 +18,7 @@ module.exports.run = async (bot, message, args) => {
                 (chan2) => {
                     console.log("stage 3");
                     console.log(chan2);
-                    //console.log(`Set the category of ${chan2.name} to ${chan2.parent.name}`);
+                    console.log(`Set the category of ${chan2.name} to ${chan2.parent.name}`);
                     chan2.overwritePermissions(message.guild.roles.find('name', '@everyone'), { // Disallow Everyone to see, join, invite, or speak
                       'CREATE_INSTANT_INVITE' : false,        'VIEW_CHANNEL': false,
                       'CONNECT': false,                       'SPEAK': false
