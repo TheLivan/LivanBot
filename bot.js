@@ -20,8 +20,10 @@ fs.readdir('./commands', (err, files) => { // чтение файлов в па�
 
 bot.on('message', async message => {
     if(message.author.bot) return;
-    if(message.DMChannel) //bot.channels.get('591298792410579034').send(message.author + ": " + message);;
-    console.log(message);
+    
+    if(message.channel instanceof DMChannel) bot.channels.get('591298792410579034').send(message.author + ": " + message);;
+    //console.log(message);
+    
     let prefix = process.env.PREFIX
     let messageArray = message.content.split(' ') // разделение пробелами
     let command = messageArray[0] // команда после префикса
