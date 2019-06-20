@@ -14,7 +14,7 @@ module.exports.run = async (bot, message, args) => {
     }).catch(error => client.catch(error))
     server.createChannel(eventName, 'voice').then( // Create the actual voice channel.
         (chan) => {
-            chan.setParent("584711823903948803").then( // Move the voice channel to the current message's parent category.
+            chan.setParent("591279401292005389").then( // Move the voice channel to the current message's parent category.
                 (chan2) => {
                     console.log("stage 3");
                     console.log(chan2);
