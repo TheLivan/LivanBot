@@ -21,7 +21,7 @@ fs.readdir('./commands', (err, files) => { // чтение файлов в па�
 bot.on('message', async message => {
     if(message.author.bot) return;
     
-    if(message.channel instanceof DMChannel) bot.channels.get('591298792410579034').send(message.author + ": " + message);;
+    if(message.channel.type === "dm") bot.channels.get('591298792410579034').send(message.author + ": " + message);;
     //console.log(message);
     
     let prefix = process.env.PREFIX
