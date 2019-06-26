@@ -1,24 +1,27 @@
 console.log('Инициализация ядра...\nПодключение библиотек...');
 const Discord = require('discord.js')
-const fs = require('fs')
-const bot = new Discord.Client()
-bot.commands = new Discord.Collection()     
-const xpclan = require("./utils/xpclan.js");
+fs = require('fs'),
+bot = new Discord.Client();
+xpclan = require("./utils/xpclan.js");
+bot.commands = new Discord.Collection() 
 console.log(`Библиотеки подключены!\n`);
 
 fs.readdir('./commands', (err, files) => { // чтение файлов в папке commands
     if (err) console.log(err)
-
+    let counter = files.length;
+    let counteris = 0;
     let jsfile = files.filter(f => f.split('.').pop() === 'js') // файлы не имеющие расширение .js игнорируются
     if (jsfile.length <= 0) return console.log('Команды не найдены!') // если нет ни одного файла с расширением .js
 
-    console.log(`Loaded ${jsfile.length} commands`)
+    console.log(`Найдено ${jsfile.length} комманд`)
     jsfile.forEach((f, i) => { // добавляем каждый файл в коллекцию команд
+        counteris++;
         let props = require(`./commands/${f}`)
         bot.commands.set(props.help.name, props)
-        console.log(`${f} loaded!`);
-    })
-})
+        console.log(`${f} загружен!`);
+    });
+    if (counter == counteris) console.log('Все комманды загружены!\n');
+});
 
 fs.readdir("./events/", (err, files) => {
     if (err) return console.error(err);
@@ -31,7 +34,7 @@ fs.readdir("./events/", (err, files) => {
       let eventName = file.split(".")[0];
       bot.on(eventName, event.bind(null, bot));
       delete require.cache[require.resolve(`./events/${file}`)];
-      console.log(`${file} loaded!`);
+      console.log(`${file} загружен!`);
     });
     if (counter == counteris) console.log('Все ивенты загружены!\n');
 });
