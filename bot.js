@@ -5,7 +5,7 @@ bot.commands = new Discord.Collection()
 const xpclan = require("./utils/xpclan.js");
 
 fs.readdir('./commands', (err, files) => { // чтение файлов в папке commands
-    if (err) console.log(err)   
+    if (err) console.log(err)
 
     let jsfile = files.filter(f => f.split('.').pop() === 'js') // файлы не имеющие расширение .js игнорируются
     if (jsfile.length <= 0) return console.log('Команды не найдены!') // если нет ни одного файла с расширением .js
@@ -18,6 +18,22 @@ fs.readdir('./commands', (err, files) => { // чтение файлов в па�
     })
 })
 
+fs.readdir("./events/", (err, files) => {
+    if (err) return console.error(err);
+    let counter = files.length;
+    let counteris = 0;
+    files.forEach(file => {
+      counteris++;
+      if (!file.endsWith(".js")) return;
+      const event = require(`./events/${file}`);
+      let eventName = file.split(".")[0];
+      client.on(eventName, event.bind(null, client));
+      delete require.cache[require.resolve(`./events/${file}`)];
+      console.log(`${file} loaded!`);
+    });
+    if (counter == counteris) console.log('Все ивенты загружены!\n');
+});
+  
 bot.on('message', async message => {
     if(message.author.bot) return;
     

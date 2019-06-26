@@ -1,4 +1,5 @@
 module.exports.run = async (bot, message, args) => {
+    /*
     var eventName = 'privatechannel';
     var server = message.guild;
     var permsName = eventName+"-"+message.author.username;
@@ -32,6 +33,7 @@ module.exports.run = async (bot, message, args) => {
         }
     ).catch(console.error);
     return '```Added```';
+    */
 }
 
 module.exports.help = {
