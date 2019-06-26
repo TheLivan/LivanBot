@@ -1,8 +1,10 @@
+console.log('Инициализация ядра...\nПодключение библиотек...');
 const Discord = require('discord.js')
 const fs = require('fs')
 const bot = new Discord.Client()
-bot.commands = new Discord.Collection() 
+bot.commands = new Discord.Collection()     
 const xpclan = require("./utils/xpclan.js");
+console.log(`Библиотеки подключены!\n`);
 
 fs.readdir('./commands', (err, files) => { // чтение файлов в папке commands
     if (err) console.log(err)
@@ -27,7 +29,7 @@ fs.readdir("./events/", (err, files) => {
       if (!file.endsWith(".js")) return;
       const event = require(`./events/${file}`);
       let eventName = file.split(".")[0];
-      client.on(eventName, event.bind(null, client));
+      bot.on(eventName, event.bind(null, bot));
       delete require.cache[require.resolve(`./events/${file}`)];
       console.log(`${file} loaded!`);
     });
