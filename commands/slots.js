@@ -12,11 +12,13 @@ module.exports.run = async (bot, message, args) => {
 	
 	if (slot1 === slot2 && slot1 === slot3) {
 		message.channel.send(stripIndents`
+		Слот: ${message.member}
         ${slot1} : ${slot2} : ${slot3}
         Поздравляем, ты выиграл!
 		`); 
 	} else {
 		message.channel.send(stripIndents`
+		Слот: ${message.member}
         ${slot1} : ${slot2} : ${slot3}
         Увы, но ты проиграл!
 		`);	
