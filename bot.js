@@ -1,10 +1,11 @@
 console.log('Инициализация ядра...\nПодключение библиотек...');
 const Discord = require('discord.js')
 fs = require('fs'),
-bot = new Discord.Client();
+    bot = new Discord.Client();
 xpclan = require("./utils/xpclan.js");
-bot.commands = new Discord.Collection() 
+bot.commands = new Discord.Collection()
 console.log(`Библиотеки подключены!\n`);
+window.current_channels    = []
 
 fs.readdir('./commands', (err, files) => { // чтение файлов в папке commands
     if (err) console.log(err)
@@ -23,33 +24,28 @@ fs.readdir('./commands', (err, files) => { // чтение файлов в па�
     if (counter == counteris) console.log('Все комманды загружены!\n');
 });
 
-bot.on("voiceStateUpdate",(oldMember,newMember)=>{
-    if(!oldMember.guild.me.hasPermission("MANAGE_CHANNELS")||!oldMember.guild.me.hasPermission("MOVE_MEMBERS"))return;
-    if(oldMember.voiceChannel&&oldMember.voiceChannel.name.includes(' Private Channel')&&oldMember.voiceChannel!=newMember.voiceChannel&&oldMember.voiceChannel.members.array().length==0)oldMember.voiceChannel.delete();
-});
-
 fs.readdir("./events/", (err, files) => {
     if (err) return console.error(err);
     let counter = files.length;
     let counteris = 0;
     files.forEach(file => {
-      counteris++;
-      if (!file.endsWith(".js")) return;
-      const event = require(`./events/${file}`);
-      let eventName = file.split(".")[0];
-      bot.on(eventName, event.bind(null, bot));
-      delete require.cache[require.resolve(`./events/${file}`)];
-      console.log(`${file} загружен!`);
+        counteris++;
+        if (!file.endsWith(".js")) return;
+        const event = require(`./events/${file}`);
+        let eventName = file.split(".")[0];
+        bot.on(eventName, event.bind(null, bot));
+        delete require.cache[require.resolve(`./events/${file}`)];
+        console.log(`${file} загружен!`);
     });
     if (counter == counteris) console.log('Все ивенты загружены!\n');
 });
-  
+
 bot.on('message', async message => {
-    if(message.author.bot) return;
-    
-    if(message.channel.type === "dm") bot.channels.get('591298792410579034').send(message.author + ": " + message);;
+    if (message.author.bot) return;
+
+    if (message.channel.type === "dm") bot.channels.get('591298792410579034').send(message.author + ": " + message);;
     //console.log(message);
-    
+
     let prefix = process.env.PREFIX
     let messageArray = message.content.split(' ') // разделение пробелами
     let command = messageArray[0] // команда после префикса
@@ -57,7 +53,7 @@ bot.on('message', async message => {
 
     let command_file = bot.commands.get(command.slice(prefix.length)) // получение команды из коллекции
     if (command_file) command_file.run(bot, message, args)
-    
+
     xpclan.xpAdd(message, bot);
     xpclan.setXpChannel(bot);
 })
@@ -73,11 +69,11 @@ Campy the Livan Bot
 | '###
 '----`)
     console.log(`${bot.user.username} is online on ${bot.guilds.size} servers!`);
-    bot.user.setPresence({status: 'dnd', game:{name: 'подписывайтесь на уведомитель', type: 0}})
+    bot.user.setPresence({ status: 'dnd', game: { name: 'подписывайтесь на уведомитель', type: 0 } })
 
-    var interval = setInterval (function () {
-		bot.channels.get('587243104625491970').send('ban huan');
-	}, 1 * 900000); 
+    var interval = setInterval(function () {
+        bot.channels.get('587243104625491970').send('ban huan');
+    }, 1 * 900000);
 })
 
 bot.login(process.env.BOT_TOKEN)

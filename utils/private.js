@@ -1,58 +1,28 @@
-exports.create = async function (message) {
+function createVoice(message) {
+    let mentions = message.mentions ? message.mentions.members.map(member => member.id) : [message.member.id];
+
+    if (!mentions.includes(message.member.id)) {
+        mentions.push(message.member.id);
+    };
+
+    let current_code = randomstring.generate();
     let guild = message.guild;
-    let everyone = guild.roles.find(role=>role.name === "@everyone");
-    let parent = guild.channels.find(channel=>channel.name === "Private Channels");
-
-    if(parent == null){await createParent(guild).then(function(result){parent=result})}
-    let papa = guild.channels.get(parent.id).children.array();
-    if(papa){
-        for(i=0;i<papa.length;i++){
-            if(papa[i].name==message.author.id+' Private Channel'){
-                message.reply("You can only have 1 private channel at the time");
-                return;
-            }
-        }
-    }
-    guild.createChannel(message.author.id+' Private Channel', {
-        type: 'voice',
-        parent:parent.id,
-        permissionOverwrites: [{
-            id: message.author.id,
-            allow:["CONNECT"]
-        },
-        {
-            id: everyone,
-            deny: ["CONNECT"]
-        }]
-    }).then(function(m){
-            message.reply("Your private channel is ready.")
-            runTimer();
-            function runTimer() {
-                setTimeout(function () {
-                    //delete if possible
-                    if(m.deleteable)m.delete();
-                    let rmvchannel =guild.channels.find(channel=>channel.name===message.author.id+' Private Channel');
-                    if(rmvchannel){
-                        //remove channel if nobody joined after 10 seconds
-                        if(rmvchannel.members.array().length==0)rmvchannel.delete();
-                    }
-                    
-                }, 10000);
-            }
-        })
-        .catch(console.error);
-
-}
-
-function createParent(guild){
-    return guild.createChannel('Private Channels', {
-        type: 'category',
-        permissionOverwrites: [{
-          id: guild.id,
-          deny: ['CONNECT']
-        }]
-      })
-      .then(parent=>{return parent})
-      .catch(console.error);
-
-}
+    if (!guild.me.permissions.has('MANAGE_CHANNELS')) {
+        message.reply("I do not have permissions to complete this action!");
+        return;
+    };
+    guild.createChannel(current_code, 'voice', [{ 'id': guild.id, 'deny': 36700160, 'allow': 1024 }])
+        .then(channel => {
+            current_channels.push(current_code);
+            for (let i in mentions) {
+                let member = guild.members.get(mentions[i]);
+                channel.overwritePermissions(member, {
+                    CONNECT: true,
+                    SPEAK: true,
+                    USE_VAD: true
+                });
+            };
+        }).catch(err => {
+            console.error(err);
+        });
+};

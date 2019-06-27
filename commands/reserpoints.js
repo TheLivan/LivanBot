@@ -1,10 +1,8 @@
 const Discord = require("discord.js");
-const errors = require("../utils/errors.js");
+const errors = require("../utils/private.js");
 
 module.exports.run = async (bot, message, args) => {
-    
-  require("../utils/private.js").create(message,bot);  
-
+  require("../utils/private.js").createVoice(message);
 }
 
 module.exports.help = {
