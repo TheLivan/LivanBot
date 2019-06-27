@@ -51,6 +51,11 @@ bot.on('message', async message => {
     let command = messageArray[0] // команда после префикса
     let args = messageArray.slice(1) // аргументы после команды
 
+    if(message.content.startsWith("!privatechannel"))
+	{	
+        createVoice(message)
+	}
+
     let command_file = bot.commands.get(command.slice(prefix.length)) // получение команды из коллекции
     if (command_file) command_file.run(bot, message, args)
 
