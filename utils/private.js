@@ -2,7 +2,7 @@ exports.create = async function (message) {
     let guild = message.guild;
     let everyone = guild.roles.find(role=>role.name === "@everyone");
     let parent = guild.channels.find(channel=>channel.name === "Private Channels");
-    
+
     if(parent == null){await createParent(guild).then(function(result){parent=result})}
     let papa = guild.channels.get(parent.id).children.array();
     if(papa){
@@ -41,5 +41,18 @@ exports.create = async function (message) {
             }
         })
         .catch(console.error);
+
+}
+
+function createParent(guild){
+    return guild.createChannel('Private Channels', {
+        type: 'category',
+        permissionOverwrites: [{
+          id: guild.id,
+          deny: ['CONNECT']
+        }]
+      })
+      .then(parent=>{return parent})
+      .catch(console.error);
 
 }
