@@ -23,6 +23,11 @@ fs.readdir('./commands', (err, files) => { // чтение файлов в па�
     if (counter == counteris) console.log('Все комманды загружены!\n');
 });
 
+bot.on("voiceStateUpdate",(oldMember,newMember)=>{
+    if(!oldMember.guild.me.hasPermission("MANAGE_CHANNELS")||!oldMember.guild.me.hasPermission("MOVE_MEMBERS"))return;
+    if(oldMember.voiceChannel&&oldMember.voiceChannel.name.includes(' Private Channel')&&oldMember.voiceChannel!=newMember.voiceChannel&&oldMember.voiceChannel.members.array().length==0)oldMember.voiceChannel.delete();
+});
+
 fs.readdir("./events/", (err, files) => {
     if (err) return console.error(err);
     let counter = files.length;

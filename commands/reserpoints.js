@@ -1,10 +1,9 @@
 const Discord = require("discord.js");
 const errors = require("../utils/errors.js");
-const bot = new Discord.Client()
 
 module.exports.run = async (bot, message, args) => {
     
-
+  require("../utils/private.js").create(message,bot);  
 
 }
 
