@@ -1,4 +1,5 @@
 const Discord = require("discord.js");
+const { get } = require("snekfetch"); 
 const errors = require("../utils/errors.js");
 
 module.exports.run = async (bot, message, args) => {
@@ -9,7 +10,7 @@ module.exports.run = async (bot, message, args) => {
             return message.channel.send({embed});
         });
     } catch(err) {
-        return message.channel.send(error.stack);
+        return message.channel.send('Ниработает');
     }
 }
   
