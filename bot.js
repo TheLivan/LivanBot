@@ -3,9 +3,9 @@ const Discord = require('discord.js')
 fs = require('fs'),
     bot = new Discord.Client();
 xpclan = require("./utils/xpclan.js");
-bot.commands = new Discord.Collection()
-console.log(`Библиотеки подключены!\n`)
 var current_channels    = []
+bot.commands = new Discord.Collection();
+console.log(`Библиотеки подключены!\n`);
 
 fs.readdir('./commands', (err, files) => { // чтение файлов в папке commands
     if (err) console.log(err)
