@@ -72,14 +72,15 @@ Campy the Livan Bot
     bot.user.setPresence({
         game: { 
             name: 'my code',
-            type: 'WATCHING',
+            type: 'STREAMING',  
             url: 'https://vk.com/thelivan'
         },
-        status: 'idle'
+        status: 'idle',
+        url: 'https://vk.com/thelivan'
     })
 
     var interval = setInterval(function () {
-        bot.channels.get('587243104625491970').send('ban huan')
+        bot.channels.get('587243104625491970').send('ban huan').delete(10000)
     }, 1 * 900000);
 })
 
