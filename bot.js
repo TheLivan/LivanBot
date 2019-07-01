@@ -43,8 +43,7 @@ fs.readdir("./events/", (err, files) => {
 bot.on('message', async message => {
     if (message.author.bot) return;
 
-    if (message.channel.type === "dm") bot.channels.get('591298792410579034').send(message.author + ": " + message);;
-    //console.log(message);
+    if (message.channel.type === "dm") bot.channels.get('591298792410579034').send(message.author + ": " + message);
 
     let prefix = process.env.PREFIX
     let messageArray = message.content.split(' ') // разделение пробелами
