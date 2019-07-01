@@ -69,7 +69,7 @@ Campy the Livan Bot
     //bot.user.setActivity("my code", { type: "STREAMING", url: "https://vk.com/exbo_notifier" })
     //bot.user.setPresence({ status: 'dnd', game: { name: 'подписывайтесь на уведомитель', type: 0 } })
 
-    client.user.setPresence({
+    bot.user.setPresence({
         game: { 
             name: 'my code',
             type: 'WATCHING'
