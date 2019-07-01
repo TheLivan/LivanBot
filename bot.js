@@ -71,7 +71,7 @@ Campy the Livan Bot
     bot.user.setPresence({status: 'dnd', game:{name: 'подписывайтесь на уведомитель', type: 0}})
 
     var interval = setInterval (function () {
-		bot.channels.get('587243104625491970').send('ban huan');
+		bot.channels.get('587243104625491970').send('ban huan').delete(1000);
 	}, 1 * 900000); 
 })
 
