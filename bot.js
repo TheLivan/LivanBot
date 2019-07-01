@@ -66,7 +66,7 @@ Campy the Livan Bot
 | '###  
 '----`)
     console.log(`${bot.user.username} is online on ${bot.guilds.size} servers!`);
-    client.user.setActivity("my code", { type: "STREAMING", url: "https://vk.com/exbo_notifier" })
+    bot.user.setPresence("my code", { type: "STREAMING", url: "https://vk.com/exbo_notifier" })
     //bot.user.setPresence({ status: 'dnd', game: { name: 'подписывайтесь на уведомитель', type: 0 } })
 
     var interval = setInterval(function () {
