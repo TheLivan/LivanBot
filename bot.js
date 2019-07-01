@@ -72,7 +72,8 @@ Campy the Livan Bot
     bot.user.setPresence({
         game: { 
             name: 'my code',
-            type: 'WATCHING'
+            type: 'WATCHING',
+            url: 'https://vk.com/thelivan'
         },
         status: 'idle'
     })
