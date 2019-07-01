@@ -76,7 +76,6 @@ Campy the Livan Bot
             url: 'https://vk.com/thelivan'
         },
         status: 'idle',
-        url: 'https://vk.com/thelivan'
     })
 
     var interval = setInterval(function () {
