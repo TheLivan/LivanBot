@@ -22,7 +22,7 @@ module.exports.run = async (bot, message, args) => {
     .addField("Время", message.createdAt)
     .addField("Причина", rreason);
 
-    let reportschannel = bot.channels.get('590535426482372646');
+    let reportschannel = bot.channels.get('587243104625491970');
     //let reportschannel = message.guild.channels.find(`name`, "reports");
     if(!reportschannel) return message.channel.send("Couldn't find reports channel.");
     reportschannel.send(reportEmbed);
