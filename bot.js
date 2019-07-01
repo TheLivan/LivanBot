@@ -1,8 +1,7 @@
 console.log('Инициализация ядра...\nПодключение библиотек...');
 const Discord = require('discord.js')
 fs = require('fs'),
-    bot = new Discord.Client();
-xpclan = require("./utils/xpclan.js");
+bot = new Discord.Client();
 var current_channels    = []
 bot.commands = new Discord.Collection();
 console.log(`Библиотеки подключены!\n`);
@@ -58,9 +57,6 @@ bot.on('message', async message => {
 
     let command_file = bot.commands.get(command.slice(prefix.length)) // получение команды из коллекции
     if (command_file) command_file.run(bot, message, args)
-
-    xpclan.xpAdd(message, bot);
-    xpclan.setXpChannel(bot);
 })
 
 bot.on('ready', () => {
