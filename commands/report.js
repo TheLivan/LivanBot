@@ -8,9 +8,10 @@ module.exports.run = async (bot, message, args) => {
       message.reply("Использование: !report <user> <причина>");
       return;
     }
+
+    let rreason = args.join(" ").slice(22);
     let rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
     if(!rUser) return errors.cantfindUser(message.channel);
-    let rreason = args.join(" ").slice(22);
     if(!rreason) return errors.noReason(message.channel);
 
     let reportEmbed = new Discord.RichEmbed()
@@ -22,7 +23,7 @@ module.exports.run = async (bot, message, args) => {
     .addField("Время", message.createdAt)
     .addField("Причина", rreason);
 
-    let reportschannel = bot.channels.get('587243104625491970');
+    let reportschannel = bot.channels.get(process.env.REPORTS_CHANNEL);
     //let reportschannel = message.guild.channels.find(`name`, "reports");
     if(!reportschannel) return message.channel.send("Couldn't find reports channel.");
     reportschannel.send(reportEmbed);
