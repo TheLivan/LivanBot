@@ -4,6 +4,6 @@ module.exports = (guild, member) => {
     console.log(member.user.username + " joined " + guild.name);
     const embed = new Discord.RichEmbed()
     .setTitle('Новый человек!')
-    .setDescription(mebmer.user.name + ' присоединился к нам!')
+    .setDescription(member.user.name + ' присоединился к нам!')
     .addField('Если нужен экскурс по серверу, то обрати внимание на #console ', 'Приятного общения!', true)
 }
