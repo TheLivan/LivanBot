@@ -50,6 +50,18 @@ bot.on('message', async message => {
     let command = messageArray[0] // команда после префикса
     let args = messageArray.slice(1) // аргументы после команды
 
+    if(message.content == 'mute'){
+        message.member.setMute(true, 'It needed to be done')
+        .then(() => console.log(`Muted ${message.member.displayName}`))
+        .catch(console.error);
+    }
+    if(message.content == 'unmute'){
+        message.member.setMute(false, 'It needed to be done')
+        .then(() => console.log(`Muted ${message.member.displayName}`))
+        .catch(console.error);
+    }
+    
+
     let command_file = bot.commands.get(command.slice(prefix.length)) // получение команды из коллекции
     if (command_file) command_file.run(bot, message, args)
 })
