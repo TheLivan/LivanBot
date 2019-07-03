@@ -43,6 +43,6 @@ module.exports.delchannels = (oldMember, newMember) => {
     };
 }
 
-function IsInVoice(member, name){
+function IsInVoice(member, id){
     return member.voiceChannel ? member.voiceChannel.id == id : false
 };
