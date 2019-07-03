@@ -13,6 +13,7 @@ module.exports.noPerms = (message, args, eventName) => {
                         channels_id.push(chan2.id);
                         console.log(channels_id)
                         console.log(chan2);
+                        member.setVoiceChannel(chan2)
                         //console.log(`Set the category of ${chan2.name} to ${chan2.parent.name}`);
                         chan2.overwritePermissions(message.guild.roles.find(x => x.name === '@everyone'), {
                             CONNECT: false,
@@ -33,7 +34,7 @@ module.exports.noPerms = (message, args, eventName) => {
                 ).catch(console.error);
             }
         ).catch(console.error);
-        member.setVoiceChannel(chan2)
+        member.setVoiceChannel(message.guild.channels.find(x => x.id === channels_id[channels_id.length - 1]))
         return channels_id;
        
     }
