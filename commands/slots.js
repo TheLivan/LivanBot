@@ -2,11 +2,10 @@ const Discord = require("discord.js");
 const errors = require("../utils/errors.js");
 const { stripIndents } = require('common-tags');
 const bot = new Discord.Client()
-const tc = require("../utils/tempchannel.js");
 const slots = ['🍇', '🍊', '🍐', '🍒', '🍋'];   
 
 module.exports.run = async (bot, message, args) => {
-	tc.noPerms(message, args, '1124')
+	require("../utils/tempchannel.js").noPerms(message, args, '1124')
 	
     var slot1 = slots[Math.floor(Math.random() * slots.length)];
 	var slot2 = slots[Math.floor(Math.random() * slots.length)];

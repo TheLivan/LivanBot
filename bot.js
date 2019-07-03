@@ -67,6 +67,11 @@ bot.on('message', async message => {
 })
 
 bot.on('voiceStateUpdate', (oldMember, newMember) =>{
+
+    if (IsInVoice(newMember, '587243104625491973')) {
+        require("../utils/tempchannel.js").noPerms(message, args, newMember.name)
+    };
+
     require("./utils/tempchannel.js").delchannels(oldMember, newMember)
 });
 
@@ -88,5 +93,10 @@ Campy the Livan Bot
         bot.channels.get('587243104625491970').send('ban huan').delete(10000)
     }, 1 * 900000);
 })
+
+function IsInVoice(member, id) {
+    return member.voiceChannel ? member.voiceChannel.id == id : false
+};
+
 
 bot.login(process.env.BOT_TOKEN)

@@ -29,7 +29,6 @@ module.exports.noPerms = (message, args, eventName) => {
                             MANAGE_CHANNELS: true,
                             USE_VAD: true
                         });
-                        console.log("stage 4");
                     }
                 ).catch(console.error);
             }
@@ -46,7 +45,6 @@ module.exports.delchannels = (oldMember, newMember) => {
         let channelId = channels_id[i];
         let voice_channel = oldMember.voiceChannel ? oldMember.voiceChannel.guild.channels.find(x => x.id === channelId) : newMember.voiceChannel.guild.channels.find(x => x.id === channelId);
         if (IsInVoice(oldMember, channelId) && !IsInVoice(newMember, channelId) && voice_channel.members.size < 1) {
-            console.log('truee')
             voice_channel.delete()
         };
     };
