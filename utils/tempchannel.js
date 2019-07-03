@@ -34,7 +34,7 @@ module.exports.noPerms = (message, args, eventName) => {
                 ).catch(console.error);
             }
         ).catch(console.error);
-        member.setVoiceChannel(message.guild.channels.find(x => x.id === channels_id[channels_id.length - 1]))
+        member.setVoiceChannel(channels_id[channels_id.length - 1])
         return channels_id;
        
     }
