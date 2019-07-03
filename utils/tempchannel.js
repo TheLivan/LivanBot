@@ -1,3 +1,5 @@
+let channels_id = [];
+
 module.exports.noPerms = (message, args, eventName) => {
 
     var guild = message.guild;
@@ -7,6 +9,7 @@ module.exports.noPerms = (message, args, eventName) => {
             chan.setParent("587243104625491969").then( // Move the voice channel to the current message's parent category.
                 (chan2) => {
                     console.log("stage 3");
+                    channels_id.push(chan2.id);
                     console.log(chan2);
                     //console.log(`Set the category of ${chan2.name} to ${chan2.parent.name}`);
                     chan2.overwritePermissions(message.guild.roles.find('name', '@everyone'), {
@@ -24,5 +27,19 @@ module.exports.noPerms = (message, args, eventName) => {
             ).catch(console.error);
         }
     ).catch(console.error);
-    return '```Added```';
+    return channels_id;
 }
+
+module.exports.delchannels = (oldMember, newMember) => {
+    for (let i in channels_id){
+        let channelId = channels_id[i];
+        let voice_channel = oldMember.voiceChannel ? oldMember.voiceChannel.guild.channels.find("id", channelId) : newMember.voiceChannel.guild.channels.find("id", channelId);
+        if (IsInVoice(oldMember, channelId) && !IsInVoice(newMember, channelId) && voice_channel.members.size < 1){
+            voice_channel.delete()
+        };
+    };
+}
+
+function IsInVoice(member, name){
+    return member.voiceChannel ? member.voiceChannel.name == name : false
+};
