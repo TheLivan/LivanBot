@@ -66,6 +66,10 @@ bot.on('message', async message => {
     if (command_file) command_file.run(bot, message, args)
 })
 
+bot.on('voiceStateUpdate', (oldMember, newMember) =>{
+    require("./utils/tempchannel.js").delchannels(oldMember, newMember)
+});
+
 bot.on('ready', () => {
     console.log(`
 Campy the Livan Bot
