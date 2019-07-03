@@ -12,7 +12,7 @@ module.exports.noPerms = (message, args, eventName) => {
                     channels_id.push(chan2.id);
                     console.log(chan2);
                     //console.log(`Set the category of ${chan2.name} to ${chan2.parent.name}`);
-                    chan2.overwritePermissions(message.guild.roles.find('name', '@everyone'), {
+                    chan2.overwritePermissions(message.guild.roles.find(x => x.name === channelId), {
                         CONNECT: false,
                         SPEAK: false,
                         USE_VAD: false
@@ -33,7 +33,7 @@ module.exports.noPerms = (message, args, eventName) => {
 module.exports.delchannels = (oldMember, newMember) => {
     for (let i in channels_id){
         let channelId = channels_id[i];
-        let voice_channel = oldMember.voiceChannel ? oldMember.voiceChannel.guild.channels.find("id", channelId) : newMember.voiceChannel.guild.channels.find("id", channelId);
+        let voice_channel = oldMember.voiceChannel ? oldMember.voiceChannel.guild.channels.find(x => x.id === channelId) : newMember.voiceChannel.guild.channels.find(x => x.id === channelId);
         if (IsInVoice(oldMember, channelId) && !IsInVoice(newMember, channelId) && voice_channel.members.size < 1){
             voice_channel.delete()
         };
