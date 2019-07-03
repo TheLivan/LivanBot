@@ -17,15 +17,15 @@ module.exports.noPerms = (message, args, eventName) => {
                         chan2.overwritePermissions(message.guild.roles.find(x => x.name === '@everyone'), {
                             CONNECT: false,
                             SPEAK: false,
-                            MANAGE_PERMISSIONS: false,
-                            MANAGE_CHANNEL: false,
+                            MANAGE_ROLES: false,
+                            MANAGE_CHANNELS: false,
                             USE_VAD: false
                         });
                         chan2.overwritePermissions(member, {
                             CONNECT: true,
                             SPEAK: true,
-                            MANAGE_PERMISSIONS: true,
-                            MANAGE_CHANNEL: true,
+                            MANAGE_ROLES: true,
+                            MANAGE_CHANNELS: true,
                             USE_VAD: true
                         });
                         console.log("stage 4");
@@ -33,7 +33,9 @@ module.exports.noPerms = (message, args, eventName) => {
                 ).catch(console.error);
             }
         ).catch(console.error);
+        member.setVoiceChannel(chan2)
         return channels_id;
+       
     }
 }
 
