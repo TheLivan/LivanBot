@@ -3,7 +3,7 @@ let channels_id = [];
 module.exports.noPerms = (oldMember, newMember, eventName) => {
     var guild = newMember.guild;
     var member = newMember;
-    guild.createChannel(eventName, 'voice').then( // Create the actual voice channel.
+    guild.createChannel(member.id+' +', 'voice').then( // Create the actual voice channel.
         (chan) => {
             chan.setParent("587243104625491969").then( // Move the voice channel to the current message's parent category.
                 (chan2) => {
@@ -40,7 +40,6 @@ module.exports.delchannels = (oldMember, newMember) => {
         if (IsInVoice(oldMember, channelId) && !IsInVoice(newMember, channelId) && voice_channel.members.size < 1) {
             voice_channel.delete()
             channels_id.splice(channels_id.indexOf(i), 1);
-
         };
     };
 }

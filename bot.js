@@ -72,7 +72,7 @@ bot.on('voiceStateUpdate', (oldMember, newMember) =>{
         require("./utils/tempchannel.js").noPerms(oldMember, newMember, newMember.name + '+')
     }; //Надо изменить скртпт tempchannel чтоб работал не с message
     
-    require("./utils/tempchannel.js").delchannels(oldMember, newMember, '323213')
+    require("./utils/tempchannel.js").delchannels(oldMember, newMember)
 });
 
 bot.on('ready', () => {
