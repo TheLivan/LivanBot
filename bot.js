@@ -42,17 +42,17 @@ fs.readdir("./events/", (err, files) => {
 bot.on('message', async message => {
     if(message.author.bot) return;
     
-    if(message.channel.type === "dm") bot.channels.get('591298792410579034').send(message.author + ": " + message);;
-    //console.log(message);
+    if(message.channel.type === "dm") bot.channels.get('591298792410579034').send(message.author + ": " + message);
     
     let prefix = process.env.PREFIX
     let messageArray = message.content.split(' ') // разделение пробелами
     let command = messageArray[0] // команда после префикса
     let args = messageArray.slice(1) // аргументы после команды
-
-    let command_file = bot.commands.get(command.slice(prefix.length)) // получение команды из коллекции
-    if (command_file) command_file.run(bot, message, args)
-    
+    if(command.slice(0, prefix.length) == prefix){
+        let command_file = bot.commands.get(command.slice(prefix.length)) // получение команды из коллекции
+        if (command_file) command_file.run(bot, message, args)
+    }
+ 
     xpclan.xpAdd(message, bot);
     xpclan.setXpChannel(bot);
 })
@@ -67,11 +67,11 @@ Campy the Livan Bot
 |  ,,,'
 | '###
 '----`)
-    console.log(`${bot.user.username} is online on ${bot.guilds.size} servers!`);
+    console.log(`${bot.user.tag} is online on ${bot.guilds.size} servers!`);
     bot.user.setPresence({status: 'dnd', game:{name: 'подписывайтесь на уведомитель', type: 0}})
 
     var interval = setInterval (function () {
-		bot.channels.get('587243104625491970').send('ban huan').delete(1000);
+		bot.channels.get('587243104625491970').send('ban huan');
 	}, 1 * 900000); 
 })
 
