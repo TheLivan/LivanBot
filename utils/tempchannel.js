@@ -1,7 +1,6 @@
 let channels_id = [];
 
 module.exports.noPerms = (oldMember, newMember, eventName) => {
-
     var guild = newMember.guild;
     var member = newMember;
     guild.createChannel(eventName, 'voice').then( // Create the actual voice channel.

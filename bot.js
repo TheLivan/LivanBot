@@ -69,7 +69,7 @@ bot.on('message', async message => {
 bot.on('voiceStateUpdate', (oldMember, newMember) =>{
     
     if (IsInVoice(newMember, '587243104625491973')) {
-        require("./utils/tempchannel.js").noPerms(oldMember, newMember)
+        require("./utils/tempchannel.js").noPerms(oldMember, newMember, '323213')
     }; //Надо изменить скртпт tempchannel чтоб работал не с message
     
     require("./utils/tempchannel.js").delchannels(oldMember, newMember, '323213')
