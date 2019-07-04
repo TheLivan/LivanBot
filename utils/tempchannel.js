@@ -26,7 +26,7 @@ module.exports.noPerms = (oldMember, newMember, eventName) => {
                         MANAGE_ROLES: true,
                         MANAGE_CHANNELS: true,
                         USE_VAD: true
-                    }); mes
+                    });
                 }
             ).catch(console.error);
         }
