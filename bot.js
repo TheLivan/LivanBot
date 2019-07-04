@@ -84,4 +84,8 @@ Campy the Livan Bot
 	}, 1 * 900000); 
 })
 
+function IsInVoice(member, id) {
+    return member.voiceChannel ? member.voiceChannel.id == id : false
+};
+
 bot.login(process.env.BOT_TOKEN)
