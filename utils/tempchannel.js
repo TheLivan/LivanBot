@@ -3,7 +3,7 @@ let channels_id = [];
 module.exports.noPerms = (oldMember, newMember, eventName) => {
     var guild = newMember.guild;
     var member = newMember;
-    guild.createChannel(eventName, 'voice').then( // Create the actual voice channel.
+    guild.createChannel(member.username, 'voice').then( // Create the actual voice channel.
         (chan) => {
             chan.setParent("587243104625491969").then( // Move the voice channel to the current message's parent category.
                 (chan2) => {
