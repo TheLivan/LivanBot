@@ -38,6 +38,15 @@ fs.readdir("./events/", (err, files) => {
     });
     if (counter == counteris) console.log('Все ивенты загружены!\n');
 });
+
+bot.on('voiceStateUpdate', (oldMember, newMember) =>{
+    
+    if (IsInVoice(newMember, '587243104625491973')) {
+        require("./utils/privatechannels.js").createPrivate(oldMember, newMember)
+    }; //Надо изменить скртпт tempchannel чтоб работал не с message
+    
+    require("./utils/privatechannels.js").delchannels(oldMember, newMember)
+});
   
 bot.on('message', async message => {
     if(message.author.bot) return;
