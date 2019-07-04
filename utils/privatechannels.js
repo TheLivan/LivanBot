@@ -17,14 +17,12 @@ module.exports.createPrivate = (oldMember, newMember) => {
                         SPEAK: false,
                         MANAGE_ROLES: false,
                         MANAGE_CHANNELS: false,
-                        USE_VAD: false
                     });
                     chan2.overwritePermissions(member, {
                         CONNECT: true,
                         SPEAK: true,
                         MANAGE_ROLES: true,
                         MANAGE_CHANNELS: true,
-                        USE_VAD: true
                     });
                     console.log('state 5')
                 }
