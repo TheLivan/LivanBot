@@ -1,13 +1,14 @@
 let channels_id = [];
 
 module.exports.createPrivate = (oldMember, newMember) => {
+    console.log('state 3')
     var guild = newMember.guild;
     var member = newMember;
     guild.createChannel(member.user.username+' +', 'voice').then( // Create the actual voice channel.
         (chan) => {
             chan.setParent("591279401292005389").then( // Move the voice channel to the current message's parent category.
                 (chan2) => {
-
+                    console.log('state 4')
                     channels_id.push(chan2.id);
                     member.setVoiceChannel(chan2.id)
                     //console.log(`Set the category of ${chan2.name} to ${chan2.parent.name}`);
@@ -25,10 +26,12 @@ module.exports.createPrivate = (oldMember, newMember) => {
                         MANAGE_CHANNELS: true,
                         USE_VAD: true
                     });
+                    console.log('state 5')
                 }
             ).catch(console.error);
         }
     ).catch(console.error);
+    console.log('state 6')
     return channels_id;
 }
 
