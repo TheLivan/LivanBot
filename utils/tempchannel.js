@@ -1,9 +1,9 @@
 let channels_id = [];
 
-module.exports.noPerms = (message, args, eventName) => {
+module.exports.noPerms = (oldMember, newMember, eventName) => {
 
-    var guild = message.guild;
-    var member = message.member;
+    var guild = newMember.guild;
+    var member = newMember.member; 
     if (member.voiceChannel) {
         guild.createChannel(eventName, 'voice').then( // Create the actual voice channel.
             (chan) => {
@@ -15,7 +15,7 @@ module.exports.noPerms = (message, args, eventName) => {
                         console.log(chan2);
                         //member.setVoiceChannel(chan2)
                         //console.log(`Set the category of ${chan2.name} to ${chan2.parent.name}`);
-                        chan2.overwritePermissions(message.guild.roles.find(x => x.name === '@everyone'), {
+                        chan2.overwritePermissions(newMember.guild.roles.find(x => x.name === '@everyone'), {
                             CONNECT: false,
                             SPEAK: false,
                             MANAGE_ROLES: false,
@@ -28,7 +28,7 @@ module.exports.noPerms = (message, args, eventName) => {
                             MANAGE_ROLES: true,
                             MANAGE_CHANNELS: true,
                             USE_VAD: true
-                        });
+                        });mes
                     }
                 ).catch(console.error);
             }
