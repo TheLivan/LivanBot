@@ -3,16 +3,13 @@ let channels_id = [];
 module.exports.noPerms = (oldMember, newMember, eventName) => {
     var guild = newMember.guild;
     var member = newMember;
-    guild.createChannel(member.username, 'voice').then( // Create the actual voice channel.
+    guild.createChannel(eventName, 'voice').then( // Create the actual voice channel.
         (chan) => {
             chan.setParent("587243104625491969").then( // Move the voice channel to the current message's parent category.
                 (chan2) => {
-                    //console.log("stage 3");
+
                     channels_id.push(chan2.id);
                     member.setVoiceChannel(chan2.id)
-                    //console.log(channels_id)
-                    //console.log(chan2);
-                    //member.setVoiceChannel(chan2)
                     //console.log(`Set the category of ${chan2.name} to ${chan2.parent.name}`);
                     chan2.overwritePermissions(newMember.guild.roles.find(x => x.name === '@everyone'), {
                         CONNECT: false,
@@ -32,12 +29,6 @@ module.exports.noPerms = (oldMember, newMember, eventName) => {
             ).catch(console.error);
         }
     ).catch(console.error);
-    /*
-    var last = channels_id[channels_id.length - 1]
-    if(isNaN(last)) last = channels_id[0];
-    console.log(last)
-    member.setVoiceChannel(last)
-    */
     return channels_id;
 }
 
