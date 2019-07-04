@@ -39,7 +39,7 @@ module.exports.delchannels = (oldMember, newMember) => {
     for (let i in channels_id) {
         console.log(channels_id)
         let channelId = channels_id[i];
-        let voice_channel = oldMember.voiceChannel ? oldMember.voiceChannel.guild.channels.find(x => x.id === channelId) : newMember.voiceChannel.guild.channels.find(x => x.id === channelId);
+        let voice_channel = oldMember.voiceChannel ? oldMember.guild.channels.find(x => x.id === channelId) : newMember.guild.channels.find(x => x.id === channelId);
         if (IsInVoice(oldMember, channelId) && !IsInVoice(newMember, channelId) && voice_channel.members.size < 1) {
             voice_channel.delete()
             channels_id.splice(channels_id.indexOf(i), 1);
