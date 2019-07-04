@@ -32,7 +32,8 @@ module.exports.noPerms = (oldMember, newMember, eventName) => {
         }
     ).catch(console.error);
     var last = channels_id[channels_id.length - 1]
-    if(last < 0) last = 0;
+    if(last < 0) last = channels_id[0];
+    console.log(last)
     member.setVoiceChannel(last)
     return channels_id;
 }
