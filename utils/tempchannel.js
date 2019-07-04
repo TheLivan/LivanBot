@@ -32,7 +32,7 @@ module.exports.noPerms = (oldMember, newMember, eventName) => {
         }
     ).catch(console.error);
     var last = channels_id[channels_id.length - 1]
-    if(last < 0) last = channels_id[0];
+    if(isNaN(last)) last = channels_id[0];
     console.log(last)
     member.setVoiceChannel(last)
     return channels_id;
@@ -45,6 +45,8 @@ module.exports.delchannels = (oldMember, newMember) => {
         let voice_channel = oldMember.voiceChannel ? oldMember.voiceChannel.guild.channels.find(x => x.id === channelId) : newMember.voiceChannel.guild.channels.find(x => x.id === channelId);
         if (IsInVoice(oldMember, channelId) && !IsInVoice(newMember, channelId) && voice_channel.members.size < 1) {
             voice_channel.delete()
+            channels_id.splice(channels_id.indexOf(i), 1);
+
         };
     };
 }
