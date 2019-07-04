@@ -14,13 +14,11 @@ module.exports.createPrivate = (oldMember, newMember) => {
                     //console.log(`Set the category of ${chan2.name} to ${chan2.parent.name}`);
                     chan2.overwritePermissions(newMember.guild.roles.find(x => x.name === '@everyone'), {
                         CONNECT: false,
-                        SPEAK: false,
                         MANAGE_ROLES: false,
                         MANAGE_CHANNELS: false,
                     });
                     chan2.overwritePermissions(member, {
                         CONNECT: true,
-                        SPEAK: true,
                         MANAGE_ROLES: true,
                         MANAGE_CHANNELS: true,
                     });
