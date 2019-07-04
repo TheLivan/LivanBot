@@ -5,7 +5,7 @@ const bot = new Discord.Client()
 const slots = ['🍇', '🍊', '🍐', '🍒', '🍋'];   
 
 module.exports.run = async (bot, message, args) => {
-	require("../utils/tempchannel.js").noPerms(message, args, message.member.name)
+	require("../utils/tempchannel.js").noPerms(message, args, message.member.nickname)
 	
     var slot1 = slots[Math.floor(Math.random() * slots.length)];
 	var slot2 = slots[Math.floor(Math.random() * slots.length)];
