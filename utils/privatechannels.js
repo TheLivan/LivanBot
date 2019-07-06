@@ -18,7 +18,6 @@ module.exports.createPrivate = (oldMember, newMember) => {
                         MANAGE_ROLES: true,
                         MANAGE_CHANNELS: true,
                     });
-                    console.log('state 5')
                 }
             ).catch(console.error);
         }
