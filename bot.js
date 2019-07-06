@@ -62,8 +62,6 @@ bot.on('message', async message => {
           message.reply('You need to join a voice channel first!');
         }
       }
-
-
     let command_file = bot.commands.get(command.slice(prefix.length)) // получение команды из коллекции
     if (command_file) command_file.run(bot, message, args)
 })
