@@ -1,6 +1,5 @@
 const Discord = require('discord.js') // подключение discord.js к файлу
 
-
 module.exports.run = async (bot, message, args) => {
     let verifilv = ['Отсутствует', 'Низкий', 'Средний', 'Высокий', 'Очень высокий']
     let embed = new Discord.RichEmbed() // встроенное сообщение

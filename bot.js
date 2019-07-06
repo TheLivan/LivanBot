@@ -32,7 +32,7 @@ fs.readdir("./events/", (err, files) => {
         counteris++;
         if (!file.endsWith(".js")) return;
         const event = require(`./events/${file}`);
-        let eventName = file.split(".")[0];
+        let eventName = file.split(".")[0]; //TODO: Сделать чтоб эвент настраивался не через название файла, а в самом файле
         bot.on(eventName, event.bind(null, bot));
         delete require.cache[require.resolve(`./events/${file}`)];
         console.log(`${file} загружен!`);
@@ -49,18 +49,6 @@ bot.on('message', async message => {
     let messageArray = message.content.split(' ') // разделение пробелами
     let command = messageArray[0] // команда после префикса
     let args = messageArray.slice(1) // аргументы после команды
-
-    if(message.content == 'mute'){
-        message.member.setMute(true, 'It needed to be done')
-        .then(() => console.log(`Muted ${message.member.displayName}`))
-        .catch(console.error);
-    }
-    if(message.content == 'unmute'){
-        message.member.setMute(false, 'It needed to be done')
-        .then(() => console.log(`Muted ${message.member.displayName}`))
-        .catch(console.error);
-    }
-    
 
     let command_file = bot.commands.get(command.slice(prefix.length)) // получение команды из коллекции
     if (command_file) command_file.run(bot, message, args)
