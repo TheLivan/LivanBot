@@ -32,7 +32,7 @@ fs.readdir("./events/", (err, files) => {
         counteris++;
         if (!file.endsWith(".js")) return;
         const event = require(`./events/${file}`);
-        let eventName = file.split(".")[0]; //TODO: Сделать чтоб эвент настраивался не через название файла, а в самом файле
+        let eventName = file.split(".")[0];
         bot.on(eventName, event.bind(null, bot));
         delete require.cache[require.resolve(`./events/${file}`)];
         console.log(`${file} загружен!`);
@@ -50,18 +50,6 @@ bot.on('message', async message => {
     let command = messageArray[0] // команда после префикса
     let args = messageArray.slice(1) // аргументы после команды
 
-    if (message.content === '/join') {
-        // Only try to join the sender's voice channel if they are in one themselves
-        if (message.member.voiceChannel) {
-          message.member.voiceChannel.join()
-            .then(connection => { // Connection is an instance of VoiceConnection
-              message.reply('I have successfully connected to the channel!');
-            })
-            .catch(console.log);
-        } else {
-          message.reply('You need to join a voice channel first!');
-        }
-      }
     let command_file = bot.commands.get(command.slice(prefix.length)) // получение команды из коллекции
     if (command_file) command_file.run(bot, message, args)
 })
@@ -90,7 +78,7 @@ Campy the Livan Bot
     bot.user.setPresence({ status: 'dnd', game: { name: 'подписывайтесь на уведомитель', type: 0 } })
     
     var interval = setInterval(function () {
-        bot.channels.get('587243104625491970').send('ban huan').delete(10000)
+        bot.channels.get('587243104625491970').send('ban huan')
     }, 1 * 900000);
 })
 
